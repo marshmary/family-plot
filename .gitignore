@@ -1,0 +1,13 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+**/node_modules
+**/dist
+
+**/.DS_store
+
+_bmad*
+.claude
+.serena
