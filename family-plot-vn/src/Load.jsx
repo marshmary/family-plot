@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SampleButton from "./SampleButton";
 import faviconSvg from "./img/favicon.svg";
 import ohKayImg from "./img/oh-kay.png";
@@ -11,6 +12,7 @@ const Load = ({
   theme,
   toggleTheme,
 }) => {
+  const { t } = useTranslation();
   const [showGedcomModal, setShowGedcomModal] = useState(false);
   const [showSamples, setShowSamples] = useState(false);
 
@@ -24,8 +26,8 @@ const Load = ({
               alt="family plot logo"
               className="homepage-logo"
             />
-            <h1>family plot</h1>
-            <p>a 3D visualizer for genealogical data</p>
+            <h1>{t('load.title')}</h1>
+            <p>{t('app.subtitle')}</p>
           </section>
 
           <section className="actions-area">
@@ -33,17 +35,17 @@ const Load = ({
               <span className="material-icons-outlined action-icon">
                 add_circle_outline
               </span>
-              <h2>start new</h2>
-              <p>create a family plot from scratch</p>
+              <h2>{t('load.startNew.title')}</h2>
+              <p>{t('load.startNew.description')}</p>
             </div>
 
             <label className="action-card" htmlFor="file-input">
               <span className="material-icons-outlined action-icon">
                 upload_file
               </span>
-              <h2>upload a file</h2>
+              <h2>{t('load.upload.title')}</h2>
               <p className="upload-desc">
-                import a .ged or .gedz file
+                {t('load.upload.description')}
                 <button
                   className="info-icon"
                   onClick={(e) => {
@@ -51,7 +53,7 @@ const Load = ({
                     e.preventDefault();
                     setShowGedcomModal(true);
                   }}
-                  aria-label="What is a GEDCOM file?"
+                  aria-label={t('load.upload.gedcomInfo')}
                 >
                   <span className="material-icons-outlined">info</span>
                 </button>
@@ -76,8 +78,8 @@ const Load = ({
               >
                 <path d="M373.5-103.5Q330-147 330-210q0-52 31-91.5t79-53.5v-85H200v-160H100v-280h280v280H280v80h400v-85q-48-14-79-53.5T570-750q0-63 43.5-106.5T720-900q63 0 106.5 43.5T870-750q0 52-31 91.5T760-605v165H520v85q48 14 79 53.5t31 91.5q0 63-43.5 106.5T480-60q-63 0-106.5-43.5Zm396-597Q790-721 790-750t-20.5-49.5Q749-820 720-820t-49.5 20.5Q650-779 650-750t20.5 49.5Q691-680 720-680t49.5-20.5ZM180-680h120v-120H180v120Zm349.5 519.5Q550-181 550-210t-20.5-49.5Q509-280 480-280t-49.5 20.5Q410-239 410-210t20.5 49.5Q451-140 480-140t49.5-20.5ZM240-740Zm480-10ZM480-210Z" />
               </svg>
-              <h2>explore samples</h2>
-              <p>view famous family plots</p>
+              <h2>{t('load.exploreSamples.title')}</h2>
+              <p>{t('load.exploreSamples.description')}</p>
             </div>
 
             {showSamples && (
@@ -90,7 +92,7 @@ const Load = ({
                   >
                     <path d="M373.5-103.5Q330-147 330-210q0-52 31-91.5t79-53.5v-85H200v-160H100v-280h280v280H280v80h400v-85q-48-14-79-53.5T570-750q0-63 43.5-106.5T720-900q63 0 106.5 43.5T870-750q0 52-31 91.5T760-605v165H520v85q48 14 79 53.5t31 91.5q0 63-43.5 106.5T480-60q-63 0-106.5-43.5Zm396-597Q790-721 790-750t-20.5-49.5Q749-820 720-820t-49.5 20.5Q650-779 650-750t20.5 49.5Q691-680 720-680t49.5-20.5ZM180-680h120v-120H180v120Zm349.5 519.5Q550-181 550-210t-20.5-49.5Q509-280 480-280t-49.5 20.5Q410-239 410-210t20.5 49.5Q451-140 480-140t49.5-20.5ZM240-740Zm480-10ZM480-210Z" />
                   </svg>
-                  sample plots
+                  {t('load.samplePlots')}
                 </h2>
                 <button
                   className="sample-overlay-close"
@@ -112,7 +114,7 @@ const Load = ({
 
           {showError && (
             <p className="error">
-              file type not supported. please use a .ged or .gedz file.
+              {t('load.error')}
             </p>
           )}
 
@@ -120,17 +122,17 @@ const Load = ({
             <button
               className="theme-toggle-slider"
               onClick={toggleTheme}
-              aria-label="Toggle color mode"
+              aria-label={theme === "dark" ? t('controls.dark') : t('controls.light')}
             >
               <span
                 className={theme === "dark" ? "active" : ""}
-                aria-label="Dark"
+                aria-label={t('controls.dark')}
               >
                 <span className="material-icons-outlined">dark_mode</span>
               </span>
               <span
                 className={theme === "light" ? "active" : ""}
-                aria-label="Light"
+                aria-label={t('controls.light')}
               >
                 <span className="material-icons-outlined">light_mode</span>
               </span>
@@ -164,58 +166,49 @@ const Load = ({
             >
               <span className="material-icons-outlined">close</span>
             </button>
-            <h2>what is a GEDCOM file?</h2>
-            <p>
-              <strong>GEDCOM</strong> (Genealogical Data Communication) is a
-              standard file format for exchanging genealogical data between
-              different family tree software programs.
-            </p>
-            <p>
-              GEDCOM files have a <strong>.ged</strong> extension and contain
-              information about individuals, families, relationships, birth
-              dates, death dates, and other genealogical data.
-            </p>
+            <h2>{t('gedcomModal.title')}</h2>
+            <p dangerouslySetInnerHTML={{ __html: t('gedcomModal.description') }} />
+            <p dangerouslySetInnerHTML={{ __html: t('gedcomModal.fileFormat') }} />
 
-            <h3>how to create a GEDCOM file</h3>
+            <h3>{t('gedcomModal.howToCreate')}</h3>
             <p>
-              Most family tree software can export your data as a GEDCOM file:
+              {t('gedcomModal.instructions')}
             </p>
 
             <div className="gedcom-programs">
               <div className="program">
                 <strong>Ancestry</strong>
-                <p>Trees → Settings → Export tree → Download GEDCOM file</p>
+                <p>{t('gedcomModal.programs.ancestry')}</p>
               </div>
 
               <div className="program">
                 <strong>MyHeritage</strong>
-                <p>Family Tree → Manage tree → Export to GEDCOM</p>
+                <p>{t('gedcomModal.programs.myHeritage')}</p>
               </div>
 
               <div className="program">
                 <strong>FamilySearch</strong>
-                <p>Family Tree → Download → GEDCOM</p>
+                <p>{t('gedcomModal.programs.familySearch')}</p>
               </div>
 
               <div className="program">
                 <strong>Legacy Family Tree</strong>
-                <p>File → Export → GEDCOM File</p>
+                <p>{t('gedcomModal.programs.legacyFamilyTree')}</p>
               </div>
 
               <div className="program">
                 <strong>Gramps</strong>
-                <p>Family Trees → Export → GEDCOM</p>
+                <p>{t('gedcomModal.programs.gramps')}</p>
               </div>
 
               <div className="program">
                 <strong>RootsMagic</strong>
-                <p>File → Export → Individual or Family</p>
+                <p>{t('gedcomModal.programs.rootsMagic')}</p>
               </div>
             </div>
 
             <p className="modal-note">
-              Once you have your GEDCOM file, simply upload it using the file
-              selector above to visualize your family tree in 3D.
+              {t('gedcomModal.note')}
             </p>
           </div>
         </div>

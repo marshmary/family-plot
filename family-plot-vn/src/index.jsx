@@ -3,6 +3,10 @@ import React, { useState, useEffect, useCallback, useRef } from "react";
 import ReactDOM from "react-dom";
 import { parse } from "./gedcom/parse";
 import { d3ize } from "./gedcom/d3ize";
+import { useTranslation } from "react-i18next";
+
+// i18n Configuration
+import "./i18n/config.js";
 
 // Components
 import Load from "./Load";
@@ -125,6 +129,7 @@ function estimateFy(yob, nodes, excludeId) {
 }
 
 const App = () => {
+  const { t } = useTranslation()
   const [showingRoots, setShowingRoots] = useState(false);
   const [d3Data, setD3Data] = useState([]);
   const [showError, setShowError] = useState(false);
@@ -716,20 +721,20 @@ const App = () => {
           {showCloseWarning && (
             <div className="modal-overlay" onClick={() => setShowCloseWarning(false)}>
               <div className="modal-content close-warning" onClick={(e) => e.stopPropagation()}>
-                <h2>unsaved changes</h2>
-                <p>You have unsaved edits. Would you like to export before closing?</p>
+                <h2>{t('unsavedChanges.title')}</h2>
+                <p>{t('unsavedChanges.message')}</p>
                 <div className="close-warning-actions">
                   <button onClick={() => { handleExportGedz(); forceClose(); }}>
-                    export .gedz & close
+                    {t('unsavedChanges.exportGedz')}
                   </button>
                   <button onClick={() => { handleExportGed(); forceClose(); }}>
-                    export .ged & close
+                    {t('unsavedChanges.exportGed')}
                   </button>
                   <button onClick={forceClose}>
-                    close without saving
+                    {t('unsavedChanges.closeWithoutSaving')}
                   </button>
                   <button onClick={() => setShowCloseWarning(false)}>
-                    cancel
+                    {t('unsavedChanges.cancel')}
                   </button>
                 </div>
               </div>

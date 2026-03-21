@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 
 const Controls = ({
@@ -28,6 +29,7 @@ const Controls = ({
 	updateFamilyColor,
 	colorList,
 }) => {
+	const { t } = useTranslation()
 	const [isNodeInfoVisible, setIsNodeInfoVisible] = useState(false)
 	const [searchQuery, setSearchQuery] = useState('')
 	const [searchOpen, setSearchOpen] = useState(false)
@@ -342,7 +344,7 @@ const Controls = ({
 					<input
 						ref={searchInputRef}
 						type='text'
-						placeholder='search...'
+						placeholder={t('controls.search')}
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 						tabIndex={searchOpen ? 0 : -1}
@@ -359,7 +361,7 @@ const Controls = ({
 				{searchOpen && searchQuery.trim() && (
 					<div className='search-results'>
 						{searchResults.length === 0 ? (
-							<p className='search-no-results'>no matches</p>
+							<p className='search-no-results'>{t('controls.noResults')}</p>
 						) : (
 							searchResults.map((person) => (
 								<div
@@ -396,21 +398,21 @@ const Controls = ({
 					<div id='settings-dropdown'>
 						{/* Theme */}
 						<div style={settingsRowStyle}>
-							<p style={settingsLabelStyle}>Theme</p>
+							<p style={settingsLabelStyle}>{t('controls.theme')}</p>
 							<button
 								className='theme-toggle-slider'
 								onClick={toggleTheme}
-								aria-label='Toggle color mode'
+								aria-label={t('controls.theme')}
 							>
 								<span
 									className={theme === 'dark' ? 'active' : ''}
-									aria-label='Dark'
+									aria-label={t('controls.dark')}
 								>
 									<span className='material-icons-outlined'>dark_mode</span>
 								</span>
 								<span
 									className={theme === 'light' ? 'active' : ''}
-									aria-label='Light'
+									aria-label={t('controls.light')}
 								>
 									<span className='material-icons-outlined'>light_mode</span>
 								</span>
@@ -422,19 +424,19 @@ const Controls = ({
 
 						{/* Name Format */}
 						<div style={settingsRowStyle}>
-							<p style={settingsLabelStyle}>Names</p>
+							<p style={settingsLabelStyle}>{t('controls.names')}</p>
 							<div style={{ display: 'flex', gap: '0.4rem' }}>
 								<button
 									onClick={() => setNameFormat('firstLast')}
 									style={pillBtnStyle(nameFormat === 'firstLast')}
 								>
-									First Last
+									{t('controls.firstLast')}
 								</button>
 								<button
 									onClick={() => setNameFormat('lastFirst')}
 									style={pillBtnStyle(nameFormat === 'lastFirst')}
 								>
-									Last, First
+									{t('controls.lastFirst')}
 								</button>
 							</div>
 						</div>
@@ -452,7 +454,7 @@ const Controls = ({
 									padding: '0.4rem 0.5rem',
 								}}
 							>
-								+ person
+								{t('controls.addPerson')}
 							</button>
 						</div>
 
@@ -460,7 +462,7 @@ const Controls = ({
 
 						{/* Export */}
 						<div style={{ padding: '0.5rem 0' }}>
-							<p style={{ ...settingsLabelStyle, marginBottom: '0.4rem' }}>Export</p>
+							<p style={{ ...settingsLabelStyle, marginBottom: '0.4rem' }}>{t('controls.export')}</p>
 							<div style={{ display: 'flex', gap: '0.4rem' }}>
 								<button
 									onClick={() => { handleExportGed(); setShowSettings(false) }}
@@ -482,21 +484,21 @@ const Controls = ({
 						{/* Controls help */}
 						<div style={{ padding: '0.5rem 0' }}>
 							<p className='control-title' style={{ color: 'var(--text)' }}>
-								controls
+								{t('controls.controls')}
 							</p>
 							{isMobile ? (
 								<>
-									<p style={{ color: 'var(--text)' }}>tap on name: person info</p>
-									<p style={{ color: 'var(--text)' }}>pinch: zoom</p>
-									<p style={{ color: 'var(--text)' }}>swipe: rotate</p>
-									<p style={{ color: 'var(--text)' }}>two-finger swipe: pan</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.mobile.tapName')}</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.mobile.pinch')}</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.mobile.swipe')}</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.mobile.twoFingerSwipe')}</p>
 								</>
 							) : (
 								<>
-									<p style={{ color: 'var(--text)' }}>click on name: person info</p>
-									<p style={{ color: 'var(--text)' }}>scroll: zoom</p>
-									<p style={{ color: 'var(--text)' }}>left-click drag: rotate</p>
-									<p style={{ color: 'var(--text)' }}>right-click drag: pan</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.desktop.clickName')}</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.desktop.scroll')}</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.desktop.leftDrag')}</p>
+									<p style={{ color: 'var(--text)' }}>{t('controls.desktop.rightDrag')}</p>
 								</>
 							)}
 						</div>
@@ -506,7 +508,7 @@ const Controls = ({
 						{/* Legend */}
 						<div style={{ padding: '0.5rem 0' }}>
 							<p className='control-title' style={{ color: 'var(--text)' }}>
-								legend
+								{t('controls.legend')}
 							</p>
 							<div className='legend-line'>
 								<span
@@ -519,7 +521,7 @@ const Controls = ({
 										flexShrink: 0,
 									}}
 								/>
-								<p style={{ color: 'var(--text)' }}>- blood line</p>
+								<p style={{ color: 'var(--text)' }}>- {t('controls.bloodLine')}</p>
 							</div>
 							<div className='legend-line'>
 								<span
@@ -532,7 +534,7 @@ const Controls = ({
 										flexShrink: 0,
 									}}
 								/>
-								<p style={{ color: 'var(--text)' }}>- love line</p>
+								<p style={{ color: 'var(--text)' }}>- {t('controls.loveLine')}</p>
 							</div>
 						</div>
 					</div>

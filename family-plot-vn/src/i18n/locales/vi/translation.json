@@ -1,0 +1,159 @@
+{
+  "app": {
+    "title": "Cây Gia Phả",
+    "subtitle": "công cụ trực quan hóa dữ liệu gia phả 3D"
+  },
+  "load": {
+    "title": "family plot",
+    "subtitle": "a 3D visualizer for genealogical data",
+    "startNew": {
+      "title": "bắt đầu mới",
+      "description": "tạo cây gia phả từ đầu"
+    },
+    "upload": {
+      "title": "tải lên tệp",
+      "description": "nhập tệp .ged hoặc .gedz",
+      "gedcomInfo": "Tệp GEDCOM là gì?"
+    },
+    "exploreSamples": {
+      "title": "khám phá mẫu",
+      "description": "xem cây gia phả nổi tiếng"
+    },
+    "samplePlots": "mẫu cây",
+    "error": "loại tệp không được hỗ trợ. vui lòng sử dụng tệp .ged hoặc .gedz"
+  },
+  "gedcomModal": {
+    "title": "Tệp GEDCOM là gì?",
+    "description": "<strong>GEDCOM</strong> (Genealogical Data Communication) là định dạng tệp tiêu chuẩn để trao đổi dữ liệu gia phả giữa các phần mềm gia phả khác nhau.",
+    "fileFormat": "Tệp GEDCOM có phần mở rộng <strong>.ged</strong> và chứa thông tin về cá nhân, gia đình, mối quan hệ, ngày sinh, ngày mất và dữ liệu gia phả khác.",
+    "howToCreate": "cách tạo tệp GEDCOM",
+    "instructions": "Hầu hết các phần mềm gia phả đều có thể xuất dữ liệu của bạn dưới dạng tệp GEDCOM:",
+    "programs": {
+      "ancestry": "Cây → Cài đặt → Xuất cây → Tải xuống tệp GEDCOM",
+      "myHeritage": "Cây gia đình → Quản lý cây → Xuất ra GEDCOM",
+      "familySearch": "Cây gia đình → Tải xuống → GEDCOM",
+      "legacyFamilyTree": "Tệp → Xuất → Tệp GEDCOM",
+      "gramps": "Cây gia đình → Xuất → GEDCOM",
+      "rootsMagic": "Tệp → Xuất → Cá nhân hoặc Gia đình"
+    },
+    "note": "Khi bạn có tệp GEDCOM, chỉ cần tải nó lên bằng bộ chọn tệp ở trên để trực quan hóa cây gia phả của bạn bằng 3D."
+  },
+  "controls": {
+    "search": "tìm kiếm...",
+    "noResults": "không tìm thấy kết quả",
+    "settings": "Cài đặt",
+    "theme": "Chủ đề",
+    "dark": "Tối",
+    "light": "Sáng",
+    "names": "Tên",
+    "firstLast": "Tên Trước",
+    "lastFirst": "Họ, Tên",
+    "addPerson": "+ người",
+    "export": "Xuất",
+    "controls": "điều khiển",
+    "legend": "chú giải",
+    "bloodLine": "dòng máu",
+    "loveLine": "dòng tình yêu",
+    "desktop": {
+      "clickName": "nhấp vào tên: thông tin người",
+      "scroll": "cuộn: phóng to/thu nhỏ",
+      "leftDrag": "kéo chuột trái: xoay",
+      "rightDrag": "kéo chuột phải: di chuyển"
+    },
+    "mobile": {
+      "tapName": "chạm vào tên: thông tin người",
+      "pinch": "chụm: phóng to/thu nhỏ",
+      "swipe": "vuốt: xoay",
+      "twoFingerSwipe": "vuốt hai ngón: di chuyển"
+    }
+  },
+  "person": {
+    "details": "Chi Tiết Người",
+    "edit": "chỉnh sửa",
+    "from": "Từ",
+    "died": "Mất",
+    "bio": "Tiểu sử"
+  },
+  "editPanel": {
+    "title": "Chỉnh Sửa Thông Tin",
+    "firstName": "Tên",
+    "surname": "Họ",
+    "gender": "Giới tính",
+    "male": "Nam",
+    "female": "Nữ",
+    "unknown": "Không rõ",
+    "birthYear": "Năm sinh",
+    "deathYear": "Năm mất",
+    "birthDate": "Ngày sinh",
+    "deathDate": "Ngày mất",
+    "birthPlace": "Nơi sinh",
+    "deathPlace": "Nơi mất",
+    "bio": "Tiểu sử",
+    "title": "Danh hiệu",
+    "save": "Lưu",
+    "delete": "Xóa",
+    "cancel": "Hủy",
+    "addParent": "thêm cha/mẹ",
+    "addSpouse": "thêm vợ/chồng",
+    "addChild": "thêm con",
+    "addRelationship": "thêm mối quan hệ",
+    "photo": "Ảnh",
+    "uploadPhoto": "tải ảnh lên",
+    "removePhoto": "xóa ảnh",
+    "parents": "Cha Mẹ",
+    "spouses": "Vợ/Chồng",
+    "children": "Con Cái",
+    "add": "+ Thêm",
+    "searchPlaceholder": "Tìm kiếm theo tên...",
+    "deleteWarning": "Việc này sẽ xóa tất cả các mối quan hệ của người này.",
+    "addPerson": "thêm người mới"
+  },
+  "tree": {
+    "node": {
+      "click": "Nhấp để xem chi tiết",
+      "loading": "Đang tải thông tin..."
+    },
+    "controls": {
+      "rotate": "Xoay",
+      "zoom": "Phóng to/thu nhỏ",
+      "pan": "Di chuyển"
+    }
+  },
+  "search": {
+    "placeholder": "Tìm kiếm tên người...",
+    "noResults": "Không tìm thấy",
+    "results": "kết quả"
+  },
+  "navigation": {
+    "help": "Trợ Giúp",
+    "tutorial": "Hướng Dẫn"
+  },
+  "common": {
+    "close": "Đóng",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "ok": "OK",
+    "yes": "Có",
+    "no": "Không"
+  },
+  "unsavedChanges": {
+    "title": "thay đổi chưa lưu",
+    "message": "Bạn có thay đổi chưa lưu. Bạn có muốn xuất trước khi đóng không?",
+    "exportGedz": "xuất .gedz & đóng",
+    "exportGed": "xuất .ged & đóng",
+    "closeWithoutSaving": "đóng mà không lưu",
+    "cancel": "hủy"
+  },
+  "samples": {
+    "shakespeare": "Shakespeare",
+    "kennedy": "Kennedy",
+    "kardashian": "Kardashian",
+    "bach": "Bach",
+    "tolkien": "Tolkien",
+    "washington": "Washington",
+    "britishroyals": "Hoàng gia Anh",
+    "greekmyth": "Thần thoại Hy Lạp",
+    "shirefolk": "Người Shire",
+    "potter": "Potter"
+  }
+}

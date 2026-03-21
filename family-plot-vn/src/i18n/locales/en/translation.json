@@ -1,0 +1,159 @@
+{
+  "app": {
+    "title": "Family Plot",
+    "subtitle": "a 3D visualizer for genealogical data"
+  },
+  "load": {
+    "title": "family plot",
+    "subtitle": "a 3D visualizer for genealogical data",
+    "startNew": {
+      "title": "start new",
+      "description": "create a family plot from scratch"
+    },
+    "upload": {
+      "title": "upload a file",
+      "description": "import a .ged or .gedz file",
+      "gedcomInfo": "What is a GEDCOM file?"
+    },
+    "exploreSamples": {
+      "title": "explore samples",
+      "description": "view famous family plots"
+    },
+    "samplePlots": "sample plots",
+    "error": "file type not supported. please use a .ged or .gedz file"
+  },
+  "gedcomModal": {
+    "title": "what is a GEDCOM file?",
+    "description": "<strong>GEDCOM</strong> (Genealogical Data Communication) is a standard file format for exchanging genealogical data between different family tree software programs.",
+    "fileFormat": "GEDCOM files have a <strong>.ged</strong> extension and contain information about individuals, families, relationships, birth dates, death dates, and other genealogical data.",
+    "howToCreate": "how to create a GEDCOM file",
+    "instructions": "Most family tree software can export your data as a GEDCOM file:",
+    "programs": {
+      "ancestry": "Trees → Settings → Export tree → Download GEDCOM file",
+      "myHeritage": "Family Tree → Manage tree → Export to GEDCOM",
+      "familySearch": "Family Tree → Download → GEDCOM",
+      "legacyFamilyTree": "File → Export → GEDCOM File",
+      "gramps": "Family Trees → Export → GEDCOM",
+      "rootsMagic": "File → Export → Individual or Family"
+    },
+    "note": "Once you have your GEDCOM file, simply upload it using the file selector above to visualize your family tree in 3D."
+  },
+  "controls": {
+    "search": "search...",
+    "noResults": "no matches",
+    "settings": "Settings",
+    "theme": "Theme",
+    "dark": "Dark",
+    "light": "Light",
+    "names": "Names",
+    "firstLast": "First Last",
+    "lastFirst": "Last, First",
+    "addPerson": "+ person",
+    "export": "Export",
+    "controls": "controls",
+    "legend": "legend",
+    "bloodLine": "blood line",
+    "loveLine": "love line",
+    "desktop": {
+      "clickName": "click on name: person info",
+      "scroll": "scroll: zoom",
+      "leftDrag": "left-click drag: rotate",
+      "rightDrag": "right-click drag: pan"
+    },
+    "mobile": {
+      "tapName": "tap on name: person info",
+      "pinch": "pinch: zoom",
+      "swipe": "swipe: rotate",
+      "twoFingerSwipe": "two-finger swipe: pan"
+    }
+  },
+  "person": {
+    "details": "Person Details",
+    "edit": "edit",
+    "from": "From",
+    "died": "Died",
+    "bio": "Bio"
+  },
+  "editPanel": {
+    "title": "Edit Person",
+    "firstName": "First Name",
+    "surname": "Surname",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "unknown": "Unknown",
+    "birthYear": "Birth Year",
+    "deathYear": "Death Year",
+    "birthDate": "Birth Date",
+    "deathDate": "Death Date",
+    "birthPlace": "Birth Place",
+    "deathPlace": "Death Place",
+    "bio": "Bio",
+    "title": "Title",
+    "save": "Save",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "addParent": "add parent",
+    "addSpouse": "add spouse",
+    "addChild": "add child",
+    "addRelationship": "add relationship",
+    "photo": "Photo",
+    "uploadPhoto": "upload photo",
+    "removePhoto": "remove photo",
+    "parents": "Parents",
+    "spouses": "Spouses",
+    "children": "Children",
+    "add": "+ Add",
+    "searchPlaceholder": "Search by name...",
+    "deleteWarning": "This will remove all their relationships.",
+    "addPerson": "add new person"
+  },
+  "tree": {
+    "node": {
+      "click": "Click to view details",
+      "loading": "Loading information..."
+    },
+    "controls": {
+      "rotate": "Rotate",
+      "zoom": "Zoom In/Out",
+      "pan": "Pan"
+    }
+  },
+  "search": {
+    "placeholder": "Search for a person...",
+    "noResults": "No results found",
+    "results": "results"
+  },
+  "navigation": {
+    "help": "Help",
+    "tutorial": "Tutorial"
+  },
+  "common": {
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "ok": "OK",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "unsavedChanges": {
+    "title": "unsaved changes",
+    "message": "You have unsaved edits. Would you like to export before closing?",
+    "exportGedz": "export .gedz & close",
+    "exportGed": "export .ged & close",
+    "closeWithoutSaving": "close without saving",
+    "cancel": "cancel"
+  },
+  "samples": {
+    "shakespeare": "Shakespeare",
+    "kennedy": "Kennedy",
+    "kardashian": "Kardashian",
+    "bach": "Bach",
+    "tolkien": "Tolkien",
+    "washington": "Washington",
+    "britishroyals": "British Royals",
+    "greekmyth": "Greek Myth",
+    "shirefolk": "Shire Folk",
+    "potter": "Potter"
+  }
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const EditPanel = ({
 	node,
@@ -17,6 +18,7 @@ const EditPanel = ({
 	updateFamilyColor,
 	colorList,
 }) => {
+	const { t } = useTranslation()
 	const [form, setForm] = useState({})
 	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 	const [addingRelation, setAddingRelation] = useState(null) // 'parent' | 'spouse' | 'child' | null
@@ -291,8 +293,8 @@ const EditPanel = ({
 			<div style={{ padding: '1rem' }}>
 				{/* Header */}
 				<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-					<h3 style={{ margin: 0 }}>Edit Person</h3>
-					<button onClick={onClose} className='close-button' aria-label='Close'>
+					<h3 style={{ margin: 0 }}>{t('editPanel.title')}</h3>
+					<button onClick={onClose} className='close-button' aria-label={t('common.close')}>
 						<span className='material-icons-outlined'>close</span>
 					</button>
 				</div>
@@ -314,10 +316,10 @@ const EditPanel = ({
 							/>
 							<div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
 								<button style={btnStyle} onClick={() => fileInputRef.current.click()}>
-									Change Photo
+									{t('editPanel.uploadPhoto')}
 								</button>
 								<button style={btnDangerStyle} onClick={() => removeNodePhoto(node.id)}>
-									Remove
+									{t('editPanel.removePhoto')}
 								</button>
 							</div>
 						</div>
@@ -336,7 +338,7 @@ const EditPanel = ({
 								fontSize: '0.8rem',
 								opacity: 0.6,
 							}} onClick={() => fileInputRef.current.click()}>
-								Add Photo
+								{t('editPanel.uploadPhoto')}
 							</div>
 						</div>
 					)}
@@ -351,7 +353,7 @@ const EditPanel = ({
 
 				{/* Person Details */}
 				<div style={fieldStyle}>
-					<label style={labelStyle}>First Name</label>
+					<label style={labelStyle}>{t('editPanel.firstName')}</label>
 					<input
 						style={inputStyle}
 						value={form.firstName || ''}
@@ -359,7 +361,7 @@ const EditPanel = ({
 					/>
 				</div>
 				<div style={fieldStyle}>
-					<label style={labelStyle}>Surname</label>
+					<label style={labelStyle}>{t('editPanel.surname')}</label>
 					<input
 						style={inputStyle}
 						value={form.surname || ''}
@@ -417,21 +419,21 @@ const EditPanel = ({
 					</div>
 				)}
 				<div style={fieldStyle}>
-					<label style={labelStyle}>Gender</label>
+					<label style={labelStyle}>{t('editPanel.gender')}</label>
 					<select
 						style={inputStyle}
 						value={form.gender || 'U'}
 						onChange={(e) => handleChange('gender', e.target.value)}
 					>
-						<option value='U'>Unspecified</option>
-						<option value='F'>Female</option>
-						<option value='M'>Male</option>
+						<option value='U'>{t('editPanel.unknown')}</option>
+						<option value='F'>{t('editPanel.female')}</option>
+						<option value='M'>{t('editPanel.male')}</option>
 					</select>
 				</div>
 
 				<div style={{ display: 'flex', gap: '0.5rem' }}>
 					<div style={{ ...fieldStyle, flex: 1 }}>
-						<label style={labelStyle}>Year of Birth</label>
+						<label style={labelStyle}>{t('editPanel.birthYear')}</label>
 						<input
 							style={inputStyle}
 							value={form.yob || ''}
@@ -440,7 +442,7 @@ const EditPanel = ({
 						/>
 					</div>
 					<div style={{ ...fieldStyle, flex: 1 }}>
-						<label style={labelStyle}>Year of Death</label>
+						<label style={labelStyle}>{t('editPanel.deathYear')}</label>
 						<input
 							style={inputStyle}
 							value={form.yod || ''}
@@ -451,7 +453,7 @@ const EditPanel = ({
 				</div>
 
 				<div style={fieldStyle}>
-					<label style={labelStyle}>Place of Birth</label>
+					<label style={labelStyle}>{t('editPanel.birthPlace')}</label>
 					<input
 						style={inputStyle}
 						value={form.pob || ''}
@@ -459,7 +461,7 @@ const EditPanel = ({
 					/>
 				</div>
 				<div style={fieldStyle}>
-					<label style={labelStyle}>Place of Death</label>
+					<label style={labelStyle}>{t('editPanel.deathPlace')}</label>
 					<input
 						style={inputStyle}
 						value={form.pod || ''}
@@ -467,7 +469,7 @@ const EditPanel = ({
 					/>
 				</div>
 				<div style={fieldStyle}>
-					<label style={labelStyle}>Title</label>
+					<label style={labelStyle}>{t('editPanel.title')}</label>
 					<input
 						style={inputStyle}
 						value={form.title || ''}
@@ -475,7 +477,7 @@ const EditPanel = ({
 					/>
 				</div>
 				<div style={fieldStyle}>
-					<label style={labelStyle}>Bio</label>
+					<label style={labelStyle}>{t('editPanel.bio')}</label>
 					<textarea
 						style={{ ...inputStyle, minHeight: '60px', resize: 'vertical' }}
 						value={form.bio || ''}
@@ -485,11 +487,11 @@ const EditPanel = ({
 
 				{/* Save button */}
 				<button style={{ ...btnPrimaryStyle, width: '100%', marginBottom: '0.5rem' }} onClick={handleSave}>
-					Save Changes
+					{t('editPanel.save')}
 				</button>
 
 				{/* Relationships */}
-				<div style={sectionTitleStyle}>Parents</div>
+				<div style={sectionTitleStyle}>{t('editPanel.parents')}</div>
 				<div>
 					{relationships.parents.map((rel) => (
 						<span key={rel.node.id} style={{ ...chipStyle, background: rel.node.color }}>
@@ -503,11 +505,11 @@ const EditPanel = ({
 						</span>
 					))}
 						<button style={{ ...btnStyle, marginLeft: '0.5rem', fontSize: '0.8rem' }} onClick={() => { setAddingRelation('parent'); setShowNewPersonForm(false); setSearchQuery('') }}>
-						+ Add
+						{t('editPanel.addParent')}
 					</button>
 				</div>
 
-				<div style={sectionTitleStyle}>Spouses</div>
+				<div style={sectionTitleStyle}>{t('editPanel.spouses')}</div>
 				<div>
 					{relationships.spouses.map((rel) => (
 						<span key={rel.node.id} style={{ ...chipStyle, background: rel.node.color }}>
@@ -521,11 +523,11 @@ const EditPanel = ({
 						</span>
 					))}
 						<button style={{ ...btnStyle, marginLeft: '0.5rem', fontSize: '0.8rem' }} onClick={() => { setAddingRelation('spouse'); setShowNewPersonForm(false); setSearchQuery('') }}>
-						+ Add
+						{t('editPanel.addSpouse')}
 					</button>
 				</div>
 
-				<div style={sectionTitleStyle}>Children</div>
+				<div style={sectionTitleStyle}>{t('editPanel.children')}</div>
 				<div>
 					{relationships.children.map((rel) => (
 						<span key={rel.node.id} style={{ ...chipStyle, background: rel.node.color }}>
@@ -539,7 +541,7 @@ const EditPanel = ({
 						</span>
 					))}
 						<button style={{ ...btnStyle, marginLeft: '0.5rem', fontSize: '0.8rem' }} onClick={() => { setAddingRelation('child'); setShowNewPersonForm(false); setSearchQuery('') }}>
-						+ Add
+						{t('editPanel.addChild')}
 					</button>
 				</div>
 
@@ -553,10 +555,10 @@ const EditPanel = ({
 					}}>
 						<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
 							<span style={{ fontWeight: 'bold', fontSize: '0.85rem' }}>
-								Add {addingRelation}
+								{t('editPanel.add')} {t(`editPanel.${addingRelation}`)}
 							</span>
 							<button onClick={() => setAddingRelation(null)} style={{ ...btnStyle, padding: '0.2rem 0.5rem', fontSize: '0.75rem' }}>
-								Cancel
+								{t('editPanel.cancel')}
 							</button>
 						</div>
 
@@ -564,7 +566,7 @@ const EditPanel = ({
 							<>
 								<input
 									style={inputStyle}
-									placeholder='Search by name...'
+									placeholder={t('editPanel.searchPlaceholder')}
 									value={searchQuery}
 									onChange={(e) => setSearchQuery(e.target.value)}
 									autoFocus
@@ -604,19 +606,19 @@ const EditPanel = ({
 						<div style={{ marginTop: '0.5rem' }}>
 							{!showNewPersonForm ? (
 								<button style={{ ...btnStyle, width: '100%', fontSize: '0.8rem' }} onClick={() => setShowNewPersonForm(true)}>
-									Create New Person
+									{t('editPanel.addPerson')}
 								</button>
 							) : (
 								<div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
 									<input
 										style={inputStyle}
-										placeholder='First name'
+										placeholder={t('editPanel.firstName')}
 										value={newPerson.firstName}
 										onChange={(e) => setNewPerson({ ...newPerson, firstName: e.target.value })}
 									/>
 									<input
 										style={inputStyle}
-										placeholder='Surname'
+										placeholder={t('editPanel.surname')}
 										value={newPerson.surname}
 										onChange={(e) => setNewPerson({ ...newPerson, surname: e.target.value })}
 									/>
@@ -625,13 +627,13 @@ const EditPanel = ({
 										value={newPerson.gender}
 										onChange={(e) => setNewPerson({ ...newPerson, gender: e.target.value })}
 									>
-										<option value='U'>Unspecified</option>
-										<option value='F'>Female</option>
-										<option value='M'>Male</option>
+										<option value='U'>{t('editPanel.unknown')}</option>
+										<option value='F'>{t('editPanel.female')}</option>
+										<option value='M'>{t('editPanel.male')}</option>
 									</select>
 									<input
 										style={inputStyle}
-										placeholder='Birth year'
+										placeholder={t('editPanel.birthYear')}
 										value={newPerson.yob}
 										onChange={(e) => setNewPerson({ ...newPerson, yob: e.target.value })}
 									/>
@@ -640,7 +642,7 @@ const EditPanel = ({
 										onClick={handleCreateAndLink}
 										disabled={!newPerson.firstName}
 									>
-										Create & Link
+										{t('editPanel.save')} & {t('editPanel.addRelationship')}
 									</button>
 								</div>
 							)}
@@ -652,19 +654,19 @@ const EditPanel = ({
 				<div style={{ marginTop: '2rem', borderTop: '1px solid var(--grey-light-soft)', paddingTop: '1rem' }}>
 					{!showDeleteConfirm ? (
 						<button style={{ ...btnDangerStyle, width: '100%' }} onClick={() => setShowDeleteConfirm(true)}>
-							Delete Person
+							{t('editPanel.delete')} {t('person.details')}
 						</button>
 					) : (
 						<div style={{ textAlign: 'center' }}>
 							<p style={{ fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-								Delete {node.name}? This will remove all their relationships.
+								{t('editPanel.delete')} {node.name}? {t('editPanel.deleteWarning')}
 							</p>
 							<div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
 								<button style={btnDangerStyle} onClick={() => removeNode(node.id)}>
-									Yes, Delete
+									{t('common.yes')}, {t('editPanel.delete')}
 								</button>
 								<button style={btnStyle} onClick={() => setShowDeleteConfirm(false)}>
-									Cancel
+									{t('editPanel.cancel')}
 								</button>
 							</div>
 						</div>
