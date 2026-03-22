@@ -554,15 +554,18 @@ const getColor = (p, surnameList) => {
     "#c89088", // sienna
   ]
 
+  // Extract first word of surname for filtering (handles multi-word surnames like "Van Nguyen")
+  const surnameFirstWord = p.surname.split(" ")[0] || p.surname
+
   const dscr = (p.tree.filter(hasTag("DSCR")) || [])[0]
 
-  const foundName = surnameList.find((sName) => sName.surname === p.surname)
+  const foundName = surnameList.find((sName) => sName.surname === surnameFirstWord)
 
   if (foundName) {
     foundName.count = foundName.count + 1
   } else {
     surnameList.push({
-      surname: p.surname,
+      surname: surnameFirstWord,
       count: 1,
       color: colorList[surnameList.length % colorList.length],
     })
@@ -571,7 +574,7 @@ const getColor = (p, surnameList) => {
   if (dscr) {
     return dscr.data
   } else {
-    return surnameList.find((sName) => sName.surname === p.surname).color
+    return surnameList.find((sName) => sName.surname === surnameFirstWord).color
   }
 }
 
