@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { LanguageSwitcher } from './components/common/LanguageSwitcher'
+import { ThemeToggle } from './components/common/ThemeToggle'
+import { useThemeStore } from './stores/themeStore'
 
 
 const Controls = ({
@@ -11,8 +14,6 @@ const Controls = ({
 	showingSurnames,
 	setShowingSurnames,
 	isMobile,
-	theme,
-	toggleTheme,
 	nameFormat,
 	setNameFormat,
 	editMode,
@@ -30,6 +31,7 @@ const Controls = ({
 	colorList,
 }) => {
 	const { t } = useTranslation()
+	const { theme } = useThemeStore()
 	const [isNodeInfoVisible, setIsNodeInfoVisible] = useState(false)
 	const [searchQuery, setSearchQuery] = useState('')
 	const [searchOpen, setSearchOpen] = useState(false)
@@ -399,25 +401,17 @@ const Controls = ({
 						{/* Theme */}
 						<div style={settingsRowStyle}>
 							<p style={settingsLabelStyle}>{t('controls.theme')}</p>
-							<button
-								className='theme-toggle-slider'
-								onClick={toggleTheme}
-								aria-label={t('controls.theme')}
-							>
-								<span
-									className={theme === 'dark' ? 'active' : ''}
-									aria-label={t('controls.dark')}
-								>
-									<span className='material-icons-outlined'>dark_mode</span>
-								</span>
-								<span
-									className={theme === 'light' ? 'active' : ''}
-									aria-label={t('controls.light')}
-								>
-									<span className='material-icons-outlined'>light_mode</span>
-								</span>
-								<span className='slider' style={{ left: theme === 'dark' ? 0 : 33 }}></span>
-							</button>
+							<ThemeToggle />
+						</div>
+
+						<hr className='settings-divider' />
+
+						{/* Language Switcher */}
+						<div style={settingsRowStyle}>
+							<p style={settingsLabelStyle}>{t('controls.language')}</p>
+							<div style={{ display: 'flex', gap: '0.4rem' }}>
+								<LanguageSwitcher />
+							</div>
 						</div>
 
 						<hr className='settings-divider' />

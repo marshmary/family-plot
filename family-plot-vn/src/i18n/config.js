@@ -14,12 +14,26 @@ const resources = {
   }
 }
 
+// Check localStorage for saved language preference
+const getStoredLanguage = () => {
+  try {
+    const saved = localStorage.getItem('preferredLanguage')
+    if (saved && ['vi', 'en'].includes(saved)) {
+      return saved
+    }
+  } catch (e) {
+    // localStorage unavailable (private browsing, disabled, quota exceeded)
+    // Fall through to default
+  }
+  return 'vi' // Default to Vietnamese
+}
+
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'vi', // Default language: Vietnamese
-    fallbackLng: 'en', // Fallback if translation key missing
+    lng: getStoredLanguage(),
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false // React already handles XSS protection
     },
@@ -27,5 +41,15 @@ i18n
       useSuspense: false // Disable suspense to avoid loading states
     }
   })
+
+// Save to localStorage whenever language changes
+const languageChangeHandler = (lng) => {
+  try {
+    localStorage.setItem('preferredLanguage', lng)
+  } catch (e) {
+    // Silently ignore localStorage write failures
+  }
+}
+i18n.on('languageChanged', languageChangeHandler)
 
 export default i18n

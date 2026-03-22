@@ -1,0 +1,43 @@
+.language-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 10px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--grey-dark);
+  border: 1.5px solid var(--grey-light-soft);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--grey-light);
+    border-color: var(--text);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .current-lang {
+    font-weight: 600;
+    font-family: 'Josefin Sans', sans-serif;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .switch-icon {
+    color: var(--accent-color, var(--text));
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .target-lang {
+    color: var(--text-dark);
+    font-family: 'Josefin Sans', sans-serif;
+    flex-grow: 1;
+    text-align: right;
+  }
+}
