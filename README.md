@@ -62,6 +62,29 @@ Built with gratitude using their open-source foundation:
 
 ---
 
+## Security
+
+### Dependency Audits
+
+Run monthly or before releases:
+
+```bash
+npm run security:check
+npm run deps:check
+```
+
+### Updating Dependencies
+
+```bash
+# Safe updates (within semver)
+npm run deps:update
+
+# Manual major updates (test thoroughly)
+npm install react@latest three@latest
+```
+
+---
+
 ## Music 🎵
 
 This project was crafted while listening to:
