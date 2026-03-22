@@ -167,6 +167,10 @@
       "verifying": "Verifying...",
       "error": "Incorrect passcode",
       "help": "Contact admin if you forgot your passcode"
+    },
+    "logout": {
+      "label": "Logout",
+      "button": "Logout"
     }
   }
 }

@@ -167,6 +167,10 @@
       "verifying": "Đang xác thực...",
       "error": "Mật khẩu không đúng",
       "help": "Liên hệ quản trị viên nếu bạn quên mật khẩu"
+    },
+    "logout": {
+      "label": "Đăng xuất",
+      "button": "Đăng xuất"
     }
   }
 }
