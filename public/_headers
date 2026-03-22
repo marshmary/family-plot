@@ -1,12 +1,8 @@
 # Netlify Headers Configuration
 # Documentation: https://docs.netlify.com/routing/headers/
 
-# Basic Auth (Layer 1 security)
-# Note: Credentials should be set via Netlify environment variables in production
-/*
-  Basic-Auth: family:YourFamilySecretPass123
-
 # HTTP Security Headers (Layer 2 security)
+# Note: Basic Auth removed - requires Netlify Pro plan. Using client-side passcode only.
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
