@@ -101,7 +101,7 @@ const Load = ({
             <ThemeToggle />
             <LanguageSwitcher />
             <a
-              href="https://github.com/oh-kay-blanket/family-plot"
+              href="https://github.com/marshmary/family-plot"
               aria-label="GitHub"
             >
               <i className="fab fa-github"></i>
