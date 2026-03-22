@@ -378,8 +378,15 @@ const Graph = ({
 
     // Cleanup: remove timeline objects when effect re-runs
     return () => {
+      if (!fgRef.current) return;
+
+      const scene = fgRef.current.scene();
       timelineObjects.forEach((obj) => {
-        fgRef.current.scene().remove(obj);
+        // Dispose Three.js resources to prevent memory leaks
+        if (obj.geometry) obj.geometry.dispose();
+        if (obj.material) obj.material.dispose();
+        // Remove from scene
+        scene.remove(obj);
       });
     };
   }, [d3Data, themeColors, fontReady]);
