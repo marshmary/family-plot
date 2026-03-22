@@ -10,6 +10,7 @@ import "./i18n/config.js";
 
 // State stores
 import { useThemeStore } from "./stores/themeStore";
+import { useOnboardingStore } from "./stores/onboardingStore";
 
 // Components
 import Load from "./Load";
@@ -25,17 +26,8 @@ import { downloadGedcom, downloadGedz, importGedz } from "./gedcomExport";
 // Style
 import "./sass/style.scss";
 
-// GEDOM files
-import halflingFile from "./gedcoms/halfling.ged";
-import kennedyFile from "./gedcoms/kennedy.ged";
-import shakespeareFile from "./gedcoms/shakespeare.ged";
-import kardashianFile from "./gedcoms/kardashian.ged";
-import bachFile from "./gedcoms/bach.ged";
-import potterFile from "./gedcoms/potter.ged";
-import royalFile from "./gedcoms/royal-family.ged";
-import tolkienFile from "./gedcoms/tolkien.ged";
-import washingtonFile from "./gedcoms/washington.ged";
-import grekGodsFile from "./gedcoms/greek-gods.ged";
+// GEDCOM files
+import familyTreeFile from "./gedcoms/family-tree.ged";
 
 
 // Generate a unique ID for new nodes
@@ -137,6 +129,8 @@ const App = () => {
   const { t } = useTranslation()
   // Use theme store
   const { theme, toggleTheme } = useThemeStore()
+  // Use onboarding store
+  const { isFirstTimeUser, hasChecked, checkFirstTimeUser } = useOnboardingStore()
 
   const [showingRoots, setShowingRoots] = useState(false);
   const [d3Data, setD3Data] = useState([]);
@@ -151,7 +145,7 @@ const App = () => {
   });
   const isMobile = window.innerWidth < 769;
   const [nameFormat, setNameFormat] = useState(
-    () => localStorage.getItem("nameFormat") || "firstLast",
+    () => localStorage.getItem("nameFormat") || "lastFirst",
   );
 
   // Edit mode state
@@ -172,6 +166,11 @@ const App = () => {
   // Initialize theme before app renders
   useEffect(() => {
     useThemeStore.getState().initTheme()
+  }, [])
+
+  // Check first-time user on app mount
+  useEffect(() => {
+    checkFirstTimeUser()
   }, [])
 
   // Update meta theme-color when theme changes
@@ -594,20 +593,6 @@ const App = () => {
     }, 1200);
   };
 
-  const samples = [
-    { name: "shakespeare", load: () => readFile(shakespeareFile) },
-    { name: "kennedy", load: () => readFile(kennedyFile) },
-    { name: "kardashian", load: () => readFile(kardashianFile) },
-    { name: "bach", load: () => readFile(bachFile) },
-    { name: "tolkien", load: () => readFile(tolkienFile) },
-    { name: "washington", load: () => readFile(washingtonFile) },
-    { name: "british royals", load: () => readFile(royalFile) },
-    { name: "greek myth", load: () => readFile(grekGodsFile) },
-
-    { name: "shire folk", load: () => readFile(halflingFile) },
-    { name: "potter", load: () => readFile(potterFile) },
-  ];
-
   const handleExportGed = () => {
     downloadGedcom(d3Data, photoStore);
   };
@@ -628,13 +613,15 @@ const App = () => {
   return (
     <>
       {isClientSideAuthEnabled && <PasscodeModal />}
+      {/* Tutorial component for first-time users - see Story 6.2 */}
+      {/* {isFirstTimeUser && hasChecked && <Tutorial />} */}
       {!showingRoots ? (
         <div style={{ opacity: loadVisible ? 1 : 0, transition: 'opacity 1.2s ease-in-out' }}>
         <Load
           handleUpload={handleUpload}
           startNewPlot={startNewPlot}
-          samples={samples}
           showError={showError}
+          readFile={readFile}
         />
         </div>
       ) : (
