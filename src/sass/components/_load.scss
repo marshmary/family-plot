@@ -224,6 +224,21 @@ body:has(#load) {
         transform: rotate(180deg);
       }
     }
+
+    // Disabled state for unauthenticated users
+    &.action-card-disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+
+      &:hover {
+        background-color: var(--grey-dark);
+      }
+
+      .action-icon {
+        color: var(--text-dark);
+      }
+    }
   }
 
   // --- Sample overlay (fills actions-area) ---

@@ -11,6 +11,7 @@ import "./i18n/config.js";
 // State stores
 import { useThemeStore } from "./stores/themeStore";
 import { useOnboardingStore } from "./stores/onboardingStore";
+import { useAuthStore } from "./stores/authStore";
 
 // Components
 import Load from "./Load";
@@ -165,11 +166,27 @@ const App = () => {
 
   // Check if client-side auth is enabled
   const isClientSideAuthEnabled = import.meta.env.ENABLE_CLIENT_SIDE_AUTH === 'true'
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   // Initialize theme before app renders
   useEffect(() => {
     useThemeStore.getState().initTheme()
   }, [])
+
+  // Subscribe to auth state changes when client-side auth is enabled
+  useEffect(() => {
+    if (isClientSideAuthEnabled) {
+      // Check initial auth state
+      const initialAuth = useAuthStore.getState().isClientAuthenticated
+      setIsAuthenticated(initialAuth)
+
+      // Subscribe to auth store changes - zustand subscribe passes entire state
+      const unsubscribe = useAuthStore.subscribe(
+        (state) => setIsAuthenticated(state.isClientAuthenticated)
+      )
+      return unsubscribe
+    }
+  }, [isClientSideAuthEnabled])
 
   // Check first-time user on app mount
   useEffect(() => {
@@ -184,6 +201,9 @@ const App = () => {
       metaThemeColor.setAttribute("content", themeColor);
     }
   }, [theme]);
+
+  // Don't render app content until authenticated (when client-side auth is enabled)
+  const shouldShowAppContent = !isClientSideAuthEnabled || isAuthenticated
 
   // Clear highlights
   const clearHighlights = () => {
@@ -628,6 +648,9 @@ const App = () => {
   return (
     <>
       {isClientSideAuthEnabled && <PasscodeModal />}
+      {/* Only render app content after authentication */}
+      {shouldShowAppContent && (
+        <>
       {/* Tutorial component for first-time users */}
       {isFirstTimeUser && hasChecked && <Tutorial />}
       {!showingRoots ? (
@@ -637,6 +660,7 @@ const App = () => {
           startNewPlot={startNewPlot}
           showError={showError}
           readFile={readFile}
+          isAuthenticated={isAuthenticated}
         />
         </div>
       ) : (
@@ -725,6 +749,8 @@ const App = () => {
               </div>
             </div>
           )}
+        </>
+      )}
         </>
       )}
     </>
