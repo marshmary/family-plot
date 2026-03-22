@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
+import Fuse from 'fuse.js'
 import { LanguageSwitcher } from './components/common/LanguageSwitcher'
 import { ThemeToggle } from './components/common/ThemeToggle'
 import { LogoutButton } from './components/auth/LogoutButton'
@@ -61,18 +62,27 @@ const Controls = ({
 		setShowingSurnames((prevState) => !prevState)
 	}
 
-	// Search results (computed inline, no graph re-render)
-	// Guard against empty or undefined d3Data
-	const nodesArray = d3Data?.nodes || []
-	const searchResults = searchQuery.length > 0
-		? nodesArray.filter((n) => {
-			const q = searchQuery.toLowerCase()
-			return (
-				(n.name && n.name.toLowerCase().includes(q)) ||
-				(n.firstName && n.firstName.toLowerCase().includes(q)) ||
-				(n.surname && n.surname.toLowerCase().includes(q))
-			)
-		}).slice(0, 8)
+	// Search results using Fuse.js fuzzy search
+	const nodesArray = d3Data?.nodes ?? []
+
+	// Create Fuse.js instance with optimized options
+	const fuse = useMemo(() => new Fuse(nodesArray, {
+		keys: [
+			{ name: 'name', weight: 1.0 },
+			{ name: 'firstName', weight: 0.8 },
+			{ name: 'surname', weight: 0.8 }
+		],
+		threshold: 0.4, // Lower = stricter matching (0.0 = exact, 1.0 = match anything)
+		includeScore: true,
+		shouldSort: true,
+		minMatchCharLength: 1,
+		ignoreLocation: true, // Don't penalize matches at different locations
+		ignoreFieldNorm: true, // Don't penalize longer fields
+		useExtendedSearch: false, // Disable extended search mode (!, ^, $, etc.)
+	}), [nodesArray])
+
+	const searchResults = searchQuery.trim().length > 0
+		? fuse.search(searchQuery).slice(0, 8).map(result => result.item)
 		: []
 
 	const handleSearchSelect = (node) => {
