@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { FamilyTreeModal } from "./components/common/FamilyTreeModal";
 import faviconSvg from "./img/favicon.svg";
 import { ThemeToggle } from "./components/common/ThemeToggle";
 import { LanguageSwitcher } from "./components/common/LanguageSwitcher";
@@ -14,16 +13,17 @@ const Load = ({
 }) => {
   const { t } = useTranslation();
   const [showGedcomModal, setShowGedcomModal] = useState(false);
-  const [showFamilyTreeModal, setShowFamilyTreeModal] = useState(false);
+  const hasTriggeredAutoLoad = useRef(false);
 
   useEffect(() => {
-    // Auto-open modal on page load (once per session)
-    const hasViewedModal = sessionStorage.getItem('familyTreeModalViewed');
+    // Auto-trigger "Discover Your Roots" on first page load (once per session)
+    const hasViewedDiscover = sessionStorage.getItem('familyTreeDiscoverClicked');
 
-    if (!hasViewedModal) {
+    if (!hasViewedDiscover && !hasTriggeredAutoLoad.current) {
+      hasTriggeredAutoLoad.current = true;
       setTimeout(() => {
-        setShowFamilyTreeModal(true);
-        sessionStorage.setItem('familyTreeModalViewed', 'true');
+        sessionStorage.setItem('familyTreeDiscoverClicked', 'true');
+        readFile(familyTreeFile);
       }, 500);
     }
   }, []);
@@ -168,14 +168,6 @@ const Load = ({
             </p>
           </div>
         </div>
-      )}
-
-      {/* Family Tree Modal */}
-      {showFamilyTreeModal && (
-        <FamilyTreeModal
-          isOpen={showFamilyTreeModal}
-          onClose={() => setShowFamilyTreeModal(false)}
-        />
       )}
     </>
   );
