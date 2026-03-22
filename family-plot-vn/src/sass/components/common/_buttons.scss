@@ -1,0 +1,43 @@
+// Action Card - Discover Your Roots (Primary CTA)
+// Matches existing action-card styling with larger icon
+.action-card-discover {
+  // Same background and border as other action cards
+  background-color: var(--grey-dark);
+  border: 1px solid var(--grey-light-soft);
+
+  &:hover {
+    background-color: var(--root-light);
+
+    .action-icon-discover {
+      color: var(--text);
+    }
+  }
+
+  .action-icon-discover {
+    // Larger icon size (user preference)
+    font-size: 2.5rem;
+    color: var(--root);
+    margin-bottom: 0.25rem;
+    transition: color 0.25s;
+
+    @media (min-width: 600px) {
+      font-size: 3rem;
+    }
+  }
+}
+
+// Secondary buttons - Start New, Upload
+.btn-secondary {
+  background: var(--secondary-bg, #e8e8e8);
+  color: var(--text-primary, #1a1a1a);
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color, #d0d0d0);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--hover-bg, #f0f0f0);
+  }
+}

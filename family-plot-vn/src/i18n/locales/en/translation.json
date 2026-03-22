@@ -172,5 +172,10 @@
       "label": "Logout",
       "button": "Logout"
     }
+  },
+  "home": {
+    "discoverRoots": "Discover Your Roots",
+    "discoverRootsDesc": "Explore your family history in 3D",
+    "discoverRootsAria": "Explore the 3D family tree"
   }
 }

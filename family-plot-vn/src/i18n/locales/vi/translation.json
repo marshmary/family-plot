@@ -172,5 +172,10 @@
       "label": "Đăng xuất",
       "button": "Đăng xuất"
     }
+  },
+  "home": {
+    "discoverRoots": "Khám Phá Cội Nguồn",
+    "discoverRootsDesc": "Khám phá lịch sử gia đình trong 3D",
+    "discoverRootsAria": "Khám phá cây gia phả 3D"
   }
 }
