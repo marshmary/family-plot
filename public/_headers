@@ -9,5 +9,5 @@
   X-XSS-Protection: 1; mode=block
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=()
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data: blob:
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.rawgit.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data: blob: https://cdn.rawgit.com
   Strict-Transport-Security: max-age=31536000; includeSubDomains
