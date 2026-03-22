@@ -53,7 +53,7 @@ export const PasscodeModal = () => {
   const errorMessage = passcodeError === 'error' ? t('auth.passcode.error') : passcodeError
 
   return (
-    <div className="passcode-modal-overlay">
+    <div className="passcode-modal-overlay" aria-modal="true" role="dialog">
       <div className="passcode-modal">
         <div className="passcode-modal-header">
           <h2>{t('auth.passcode.title')}</h2>
@@ -73,6 +73,7 @@ export const PasscodeModal = () => {
               autoFocus
               disabled={isSubmitting}
               aria-label={t('auth.passcode.label')}
+              autoComplete="off"
             />
           </div>
 

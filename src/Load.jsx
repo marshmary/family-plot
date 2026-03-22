@@ -10,12 +10,16 @@ const Load = ({
   startNewPlot,
   showError,
   readFile,
+  isAuthenticated,
 }) => {
   const { t } = useTranslation();
   const [showGedcomModal, setShowGedcomModal] = useState(false);
   const hasTriggeredAutoLoad = useRef(false);
 
   useEffect(() => {
+    // Only auto-trigger if authenticated
+    if (!isAuthenticated) return;
+
     // Auto-trigger "Discover Your Roots" on first page load (once per session)
     const hasViewedDiscover = sessionStorage.getItem('familyTreeDiscoverClicked');
 
@@ -26,7 +30,7 @@ const Load = ({
         readFile(familyTreeFile);
       }, 500);
     }
-  }, []);
+  }, [isAuthenticated, readFile]);
 
   return (
     <>
@@ -45,8 +49,8 @@ const Load = ({
           <section className="actions-area">
             {/* Primary CTA - Discover Your Roots */}
             <div
-              className="action-card action-card-discover"
-              onClick={() => readFile(familyTreeFile)}
+              className={`action-card action-card-discover ${!isAuthenticated ? 'action-card-disabled' : ''}`}
+              onClick={() => isAuthenticated && readFile(familyTreeFile)}
             >
               <span className="material-icons-outlined action-icon action-icon-discover">
                 auto_graph
@@ -55,7 +59,10 @@ const Load = ({
               <p>{t('home.discoverRootsDesc')}</p>
             </div>
 
-            <div className="action-card" onClick={startNewPlot}>
+            <div
+              className={`action-card ${!isAuthenticated ? 'action-card-disabled' : ''}`}
+              onClick={() => isAuthenticated && startNewPlot()}
+            >
               <span className="material-icons-outlined action-icon">
                 add_circle_outline
               </span>
@@ -63,7 +70,7 @@ const Load = ({
               <p>{t('load.startNew.description')}</p>
             </div>
 
-            <label className="action-card" htmlFor="file-input">
+            <label className={`action-card ${!isAuthenticated ? 'action-card-disabled' : ''}`} htmlFor="file-input">
               <span className="material-icons-outlined action-icon">
                 upload_file
               </span>
@@ -86,7 +93,8 @@ const Load = ({
                 id="file-input"
                 type="file"
                 name="gedFile"
-                onChange={handleUpload}
+                onChange={(e) => isAuthenticated && handleUpload(e)}
+                disabled={!isAuthenticated}
               />
             </label>
           </section>
