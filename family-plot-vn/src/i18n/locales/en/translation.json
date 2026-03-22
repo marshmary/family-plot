@@ -177,5 +177,15 @@
     "discoverRoots": "Discover Your Roots",
     "discoverRootsDesc": "Explore your family history in 3D",
     "discoverRootsAria": "Explore the 3D family tree"
+  },
+  "modal": {
+    "familyTree": "Family Tree",
+    "close": "Close",
+    "treeLoading": "Loading your family tree...",
+    "hints": {
+      "rotate": "Drag to rotate",
+      "zoom": "Scroll or pinch to zoom",
+      "select": "Tap a person to see details"
+    }
   }
 }
