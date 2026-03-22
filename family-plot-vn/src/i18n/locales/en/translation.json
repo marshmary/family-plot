@@ -187,5 +187,35 @@
       "zoom": "Scroll or pinch to zoom",
       "select": "Tap a person to see details"
     }
+  },
+  "tutorial": {
+    "title": "How to Use",
+    "subtitle": "Learn to navigate the 3D family tree",
+    "rotate": {
+      "title": "Drag to Rotate",
+      "description": "Click and drag to rotate the 3D view",
+      "hint": "Action: Left-click + drag"
+    },
+    "zoom": {
+      "title": "Zoom In/Out",
+      "description": "Scroll or pinch to zoom in and out",
+      "hint": "Action: Scroll wheel or pinch gesture"
+    },
+    "pan": {
+      "title": "Pan View",
+      "description": "Right-click and drag to pan around",
+      "hint": "Action: Right-click + drag"
+    },
+    "select": {
+      "title": "Select Person",
+      "description": "Click on a person to see their details",
+      "hint": "Action: Click on a person node"
+    },
+    "search": {
+      "title": "Search",
+      "description": "Type a name to find and zoom to a person",
+      "hint": "Action: Type in the search bar"
+    },
+    "gotIt": "Got it"
   }
 }
