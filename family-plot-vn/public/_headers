@@ -1,2 +1,17 @@
+# Netlify Headers Configuration
+# Documentation: https://docs.netlify.com/routing/headers/
+
+# Basic Auth (Layer 1 security)
+# Note: Credentials should be set via Netlify environment variables in production
 /*
   Basic-Auth: family:YourFamilySecretPass123
+
+# HTTP Security Headers (Layer 2 security)
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; img-src 'self' data: blob:
+  Strict-Transport-Security: max-age=31536000; includeSubDomains

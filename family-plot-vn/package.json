@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "predeploy": "node -e \"const fs=require('fs');const b=JSON.parse(fs.readFileSync('build-number.json'));b.build++;fs.writeFileSync('build-number.json',JSON.stringify(b,null,2)+'\\n')\" && npm run build",
+    "predeploy": "node --input-type=module -e \"import fs from 'fs';const b=JSON.parse(fs.readFileSync('build-number.json'));b.build++;fs.writeFileSync('build-number.json',JSON.stringify(b,null,2)+'\\n')\" && npm run build",
     "deploy": "gh-pages -d dist --cname family-plot.ohkaycomputer.com"
   },
   "keywords": [],
