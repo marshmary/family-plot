@@ -166,7 +166,8 @@
       "submit": "Submit",
       "verifying": "Verifying...",
       "error": "Incorrect passcode",
-      "help": "Contact admin if you forgot your passcode"
+      "help": "Contact admin if you forgot your passcode",
+      "lockedOut": "Too many failed attempts. Please try again in 15 minutes."
     },
     "logout": {
       "label": "Logout",

@@ -166,7 +166,8 @@
       "submit": "Xác nhận",
       "verifying": "Đang xác thực...",
       "error": "Mật khẩu không đúng",
-      "help": "Liên hệ quản trị viên nếu bạn quên mật khẩu"
+      "help": "Liên hệ quản trị viên nếu bạn quên mật khẩu",
+      "lockedOut": "Quá nhiều lần thử thất bại. Vui lòng thử lại sau 15 phút."
     },
     "logout": {
       "label": "Đăng xuất",
