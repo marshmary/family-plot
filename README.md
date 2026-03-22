@@ -3,6 +3,7 @@
 **Family Plot VN** is an interactive 3D family tree visualizer built with React and Three.js. Upload GEDCOM files, explore genealogies in a force-directed 3D graph, and trace family relationships through time.
 
 [![Live Demo](https://img.shields.io/badge/Demo-online-green)](https://family-plot.ohkaycomputer.com/)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0d037b30-989f-4085-8d35-1848d5196ded/deploy-status)](https://app.netlify.com/projects/family-plot/deploys)
 
 ---
 
