@@ -1,6 +1,6 @@
 // Modules
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { parse } from "./gedcom/parse";
 import { d3ize } from "./gedcom/d3ize";
 import { useTranslation } from "react-i18next";
@@ -8,11 +8,16 @@ import { useTranslation } from "react-i18next";
 // i18n Configuration
 import "./i18n/config.js";
 
+// State stores
+import { useThemeStore } from "./stores/themeStore";
+
 // Components
 import Load from "./Load";
 import Controls from "./Controls";
 import Graph from "./Graph";
 import EditPanel from "./EditPanel";
+import { PasscodeModal } from "./components/auth/PasscodeModal";
+import { ThemeToggle } from "./components/common/ThemeToggle";
 
 // Export utilities
 import { downloadGedcom, downloadGedz, importGedz } from "./gedcomExport";
@@ -130,6 +135,9 @@ function estimateFy(yob, nodes, excludeId) {
 
 const App = () => {
   const { t } = useTranslation()
+  // Use theme store
+  const { theme, toggleTheme } = useThemeStore()
+
   const [showingRoots, setShowingRoots] = useState(false);
   const [d3Data, setD3Data] = useState([]);
   const [showError, setShowError] = useState(false);
@@ -142,9 +150,6 @@ const App = () => {
     links: [],
   });
   const isMobile = window.innerWidth < 769;
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "dark",
-  );
   const [nameFormat, setNameFormat] = useState(
     () => localStorage.getItem("nameFormat") || "firstLast",
   );
@@ -161,41 +166,22 @@ const App = () => {
   const [loadVisible, setLoadVisible] = useState(true);
   const graphRef = useRef(null);
 
-  // Detect device color scheme on mount (only if no saved preference)
-  useEffect(() => {
-    if (!localStorage.getItem("theme")) {
-      const mq = window.matchMedia("(prefers-color-scheme: dark)");
-      if (mq.matches) {
-        setTheme("dark");
-      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
-        setTheme("light");
-      } else {
-        setTheme("dark");
-      }
-    }
-  }, []);
+  // Check if client-side auth is enabled
+  const isClientSideAuthEnabled = import.meta.env.ENABLE_CLIENT_SIDE_AUTH === 'true'
 
-  // Set data-theme attribute on body, persist to localStorage, and update theme-color
+  // Initialize theme before app renders
   useEffect(() => {
-    document.body.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    useThemeStore.getState().initTheme()
+  }, [])
 
-    // Update the meta theme-color to match the current theme
+  // Update meta theme-color when theme changes
+  useEffect(() => {
     const themeColor = theme === "light" ? "#fcfaf4" : "#010000";
     const metaThemeColor = document.querySelector('meta[name="theme-color"]');
     if (metaThemeColor) {
       metaThemeColor.setAttribute("content", themeColor);
     }
   }, [theme]);
-
-  // Persist nameFormat to localStorage
-  useEffect(() => {
-    localStorage.setItem("nameFormat", nameFormat);
-  }, [nameFormat]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
 
   // Clear highlights
   const clearHighlights = () => {
@@ -641,6 +627,7 @@ const App = () => {
 
   return (
     <>
+      {isClientSideAuthEnabled && <PasscodeModal />}
       {!showingRoots ? (
         <div style={{ opacity: loadVisible ? 1 : 0, transition: 'opacity 1.2s ease-in-out' }}>
         <Load
@@ -648,8 +635,6 @@ const App = () => {
           startNewPlot={startNewPlot}
           samples={samples}
           showError={showError}
-          theme={theme}
-          toggleTheme={toggleTheme}
         />
         </div>
       ) : (
@@ -663,8 +648,6 @@ const App = () => {
             showingSurnames={showingSurnames}
             setShowingSurnames={setShowingSurnames}
             isMobile={isMobile}
-            theme={theme}
-            toggleTheme={toggleTheme}
             nameFormat={nameFormat}
             setNameFormat={setNameFormat}
             editMode={editMode}
@@ -746,7 +729,7 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
 // Register service worker for PWA support
 if ("serviceWorker" in navigator) {

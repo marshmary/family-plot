@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import fs from 'fs';
@@ -22,30 +22,38 @@ function gedcomLoader() {
   };
 }
 
-export default defineConfig({
-  plugins: [
-    react(),
-    gedcomLoader(),
-    viteStaticCopy({
-      targets: [
-        { src: 'src/manifest.json', dest: '' },
-        { src: 'src/service-worker.js', dest: '' },
-        { src: 'src/img/icon-192.png', dest: '' },
-        { src: 'src/img/icon-512.png', dest: '' },
-        { src: 'src/img/favicon.svg', dest: '' },
-        { src: 'public/gedcom/*.ged', dest: 'gedcom' },
-      ],
-    }),
-  ],
-  define: {
-    __BUILD_NUMBER__: JSON.stringify(buildNumber.build),
-  },
-  server: {
-    host: '0.0.0.0',
-    port: 5173,
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: true,
-  },
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '')
+
+  return {
+    plugins: [
+      react(),
+      gedcomLoader(),
+      viteStaticCopy({
+        targets: [
+          { src: 'src/manifest.json', dest: '' },
+          { src: 'src/service-worker.js', dest: '' },
+          { src: 'src/img/icon-192.png', dest: '' },
+          { src: 'src/img/icon-512.png', dest: '' },
+          { src: 'src/img/favicon.svg', dest: '' },
+          { src: 'public/gedcom/*.ged', dest: 'gedcom' },
+        ],
+      }),
+    ],
+    define: {
+      __BUILD_NUMBER__: JSON.stringify(buildNumber.build),
+      // Expose passcode to client (auth check runs in browser)
+      'import.meta.env.VITE_PASSCODE': JSON.stringify(env.VITE_PASSCODE || ''),
+      // Expose auth enabled flag to client
+      'import.meta.env.ENABLE_CLIENT_SIDE_AUTH': JSON.stringify(env.ENABLE_CLIENT_SIDE_AUTH || 'false'),
+    },
+    server: {
+      host: '0.0.0.0',
+      port: 5173,
+    },
+    build: {
+      outDir: 'dist',
+      sourcemap: true,
+    },
+  };
 });

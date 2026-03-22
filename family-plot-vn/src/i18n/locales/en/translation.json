@@ -43,6 +43,7 @@
     "noResults": "no matches",
     "settings": "Settings",
     "theme": "Theme",
+    "language": "Language",
     "dark": "Dark",
     "light": "Light",
     "names": "Names",
@@ -155,5 +156,17 @@
     "greekmyth": "Greek Myth",
     "shirefolk": "Shire Folk",
     "potter": "Potter"
+  },
+  "auth": {
+    "passcode": {
+      "title": "Enter Passcode",
+      "subtitle": "Enter the passcode to access the family tree",
+      "placeholder": "Passcode...",
+      "label": "Access Passcode",
+      "submit": "Submit",
+      "verifying": "Verifying...",
+      "error": "Incorrect passcode",
+      "help": "Contact admin if you forgot your passcode"
+    }
   }
 }

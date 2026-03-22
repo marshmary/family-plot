@@ -43,6 +43,7 @@
     "noResults": "không tìm thấy kết quả",
     "settings": "Cài đặt",
     "theme": "Chủ đề",
+    "language": "Ngôn ngữ",
     "dark": "Tối",
     "light": "Sáng",
     "names": "Tên",
@@ -155,5 +156,17 @@
     "greekmyth": "Thần thoại Hy Lạp",
     "shirefolk": "Người Shire",
     "potter": "Potter"
+  },
+  "auth": {
+    "passcode": {
+      "title": "Nhập mật khẩu",
+      "subtitle": "Nhập mật khẩu để truy cập cây gia phả",
+      "placeholder": "Mật khẩu...",
+      "label": "Mật khẩu truy cập",
+      "submit": "Xác nhận",
+      "verifying": "Đang xác thực...",
+      "error": "Mật khẩu không đúng",
+      "help": "Liên hệ quản trị viên nếu bạn quên mật khẩu"
+    }
   }
 }
