@@ -19,6 +19,7 @@ import Graph from "./Graph";
 import EditPanel from "./EditPanel";
 import { PasscodeModal } from "./components/auth/PasscodeModal";
 import { ThemeToggle } from "./components/common/ThemeToggle";
+import { Tutorial } from "./components/onboarding/Tutorial";
 
 // Export utilities
 import { downloadGedcom, downloadGedz, importGedz } from "./gedcomExport";
@@ -87,12 +88,14 @@ function rebuildSurnameList(nodes) {
   });
 
   nodes.forEach((node) => {
-    const surname = node.surname || "";
+    const fullSurname = node.surname || "";
+    // Extract first word only for filtering (handles multi-word surnames like "Van Nguyen")
+    const surname = fullSurname.split(" ")[0] || "";
     if (!surnameMap[surname]) {
       surnameMap[surname] = {
         surname,
         count: 0,
-        color: existingColors[surname] || "#ccc",
+        color: existingColors[fullSurname] || "#ccc",
       };
     }
     surnameMap[surname].count++;
@@ -284,7 +287,11 @@ const App = () => {
     tempHighlights.family = [...new Set(tempHighlights.family)];
     tempHighlights.links = [...new Set(tempHighlights.links)];
 
-    let descendantH = structuredClone(cloneable);
+    // Use JSON fallback for browsers that don't support structuredClone
+    // Note: JSON fallback loses Date, Map, Set, undefined, functions - but works for plain objects
+    let descendantH = typeof structuredClone === 'function'
+      ? structuredClone(cloneable)
+      : JSON.parse(JSON.stringify(cloneable));
     while (true) {
       const before = descendantH.family.length;
       buildDescendantLines(descendantH);
@@ -309,13 +316,21 @@ const App = () => {
     setGraphReady(false);
     setControlsVisible(false);
     setTimeout(() => {
-      setD3Data(d3ize(parse(file)));
-      setShowingRoots(true);
-      setShowError(false);
-      setPhotoStore({});
-      setEditMode(false);
-      setEditingNode(null);
-      setHasEdits(false);
+      try {
+        setD3Data(d3ize(parse(file)));
+        setShowingRoots(true);
+        setShowError(false);
+        setPhotoStore({});
+        setEditMode(false);
+        setEditingNode(null);
+        setHasEdits(false);
+      } catch (parseError) {
+        console.error('Error parsing GEDCOM file:', parseError);
+        setShowError(true);
+        setLoadVisible(true);
+        setGraphReady(false);
+        setControlsVisible(false);
+      }
     }, 1200);
   };
 
@@ -613,8 +628,8 @@ const App = () => {
   return (
     <>
       {isClientSideAuthEnabled && <PasscodeModal />}
-      {/* Tutorial component for first-time users - see Story 6.2 */}
-      {/* {isFirstTimeUser && hasChecked && <Tutorial />} */}
+      {/* Tutorial component for first-time users */}
+      {isFirstTimeUser && hasChecked && <Tutorial />}
       {!showingRoots ? (
         <div style={{ opacity: loadVisible ? 1 : 0, transition: 'opacity 1.2s ease-in-out' }}>
         <Load

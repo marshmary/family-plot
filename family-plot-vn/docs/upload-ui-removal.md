@@ -26,17 +26,15 @@ This document tracks what needs to be removed in a future story.
 
 ---
 
-### 2. SampleButton.js Component
+### 2. Sample GEDCOM Files
 
-**File:** `src/SampleButton.jsx`
+**Location:** `src/gedcoms/` directory
 
-**Purpose:** Button component for loading sample GEDCOM files
+**Purpose:** Pre-loaded sample family trees for testing
 
-**What to Remove:**
-- Entire file - no longer needed since we bundle one GEDCOM
-
-**References to Update:**
-- Check `src/Load.js` (if kept) for imports
+**What to Remove (Optional):**
+- Remove individual `.ged` files if not needed for testing
+- Keep at least one sample for development/testing (e.g., `family-tree.ged`)
 
 ---
 
@@ -49,7 +47,7 @@ This document tracks what needs to be removed in a future story.
 - Upload button
 - Drag-and-drop zone (if exists)
 - File validation error messages
-- "Or load a sample" section with SampleButton
+- "Or load a sample" section
 
 ---
 
@@ -142,7 +140,6 @@ When ready to remove upload UI:
 - [ ] Read this entire document
 - [ ] Create backup branch before making changes
 - [ ] Remove `src/Load.js` (or refactor)
-- [ ] Remove `src/SampleButton.jsx`
 - [ ] Update `src/index.jsx` to auto-load bundled GEDCOM
 - [ ] Remove file upload state and handlers
 - [ ] Remove any unused imports
@@ -171,7 +168,6 @@ When ready to remove upload UI:
 | File | Status | Notes |
 |------|--------|-------|
 | `src/Load.js` | Remove | Upload UI component |
-| `src/SampleButton.jsx` | Remove | Sample data loader |
 | `src/gedcoms/*.ged` | Optional | Sample GEDCOM files - can keep for testing |
 | `src/gedcom/parse.js` | Keep | Parser still used |
 | `src/gedcom/d3ize.js` | Keep | Data transformer still used |

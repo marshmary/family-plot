@@ -121,7 +121,6 @@ src/
 ├── Controls.js         # Search, settings, surname filter, node info
 ├── Load.js             # Landing page, file upload, sample selector
 ├── EditPanel.js        # Edit panel for people and relationships
-├── SampleButton.js     # Sample tree button component
 ├── gedcomExport.js     # GEDCOM/GEDZ export and import
 ├── gedcom/
 │   ├── parse.js        # GEDCOM parser

@@ -36,7 +36,6 @@ export default defineConfig(({ mode }) => {
           { src: 'src/img/icon-192.png', dest: '' },
           { src: 'src/img/icon-512.png', dest: '' },
           { src: 'src/img/favicon.svg', dest: '' },
-          { src: 'public/gedcom/*.ged', dest: 'gedcom' },
         ],
       }),
     ],

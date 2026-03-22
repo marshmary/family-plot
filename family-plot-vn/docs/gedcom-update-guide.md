@@ -2,13 +2,15 @@
 
 ## Overview
 
-This guide explains how to update the family tree data by replacing the bundled GEDCOM file. The family tree uses a **bundled GEDCOM** approach, meaning the data file is included in the repository and deployed with the site.
+This guide explains how to update the family tree data. The family tree uses a **bundled GEDCOM** approach, meaning the data file is included in the repository at build time.
+
+**Current Architecture:** The GEDCOM file is imported at build time from `src/gedcoms/family-tree.ged` and bundled into the application.
 
 ---
 
 ## Quick Reference
 
-**GEDCOM File Location:** `public/gedcom/family.ged`
+**GEDCOM File Location:** `src/gedcoms/family-tree.ged`
 
 **Update Process:** Replace file → Git commit → Git push → Netlify auto-deploys
 
@@ -23,7 +25,7 @@ Open your genealogy software (Family Tree Maker, Gramps, Legacy, etc.) and:
 1. Open your family tree project
 2. Go to **File → Export → GEDCOM** (or similar)
 3. Choose **GEDCOM 5.5** or **5.5.1** format
-4. Save the file as `family.ged` (or any name, you'll rename it)
+4. Save the file (any name, you'll rename it)
 5. Choose **UTF-8** character encoding if prompted
 
 **Tips:**
@@ -37,12 +39,12 @@ Open your genealogy software (Family Tree Maker, Gramps, Legacy, etc.) and:
 
 1. Navigate to the project folder on your computer:
    ```
-   family-plot-vn/public/gedcom/
+   family-plot-vn/src/gedcoms/
    ```
 
 2. Copy your new GEDCOM file into this folder
 
-3. Rename it to `family.ged` (overwrite the existing file)
+3. Rename it to `family-tree.ged` (overwrite the existing file)
 
    **On Windows:**
    - If prompted "Replace this file?", click **Yes**
@@ -50,14 +52,14 @@ Open your genealogy software (Family Tree Maker, Gramps, Legacy, etc.) and:
 
    **On Mac/Linux:**
    ```bash
-   cp /path/to/your/exported.ged family-plot-vn/public/gedcom/family.ged
+   cp /path/to/your/exported.ged family-plot-vn/src/gedcoms/family-tree.ged
    ```
 
 ---
 
 ### Step 3: Verify the File (Optional but Recommended)
 
-Open `family.ged` in a text editor and check:
+Open `family-tree.ged` in a text editor and check:
 
 - First line should be: `0 HEAD`
 - Should contain records like: `0 @I1@ INDI` (individuals)
@@ -76,11 +78,11 @@ Open a terminal (or use Git GUI) and run:
 # Navigate to the project folder
 cd path/to/family-plot-vn
 
-# Check what changed (should show public/gedcom/family.ged)
+# Check what changed (should show src/gedcoms/family-tree.ged)
 git status
 
 # Stage the GEDCOM file
-git add public/gedcom/family.ged
+git add src/gedcoms/family-tree.ged
 
 # Commit with a descriptive message
 git commit -m "Update family data - [date or description]"
@@ -197,21 +199,9 @@ Check for:
 - Build script failures
 
 **Solution:**
-- Verify `family.ged` exists in `public/gedcom/`
+- Verify `family-tree.ged` exists in `src/gedcoms/`
 - Check file is valid text (not binary or corrupted)
 - Try committing and pushing again
-
----
-
-## Alternative Workflow: Separate Data Repository
-
-If you don't want GEDCOM files in the main repository:
-
-1. Create a private repository for GEDCOM files
-2. Use Git submodule or CI/CD to copy GEDCOM during build
-3. Or manually update GEDCOM via Netlify's file upload (advanced)
-
-This keeps family data separate from code but requires more setup.
 
 ---
 
@@ -236,10 +226,10 @@ This keeps family data separate from code but requires more setup.
 
 ```bash
 # See when GEDCOM was last updated
-git log -- public/gedcom/family.ged
+git log -- src/gedcoms/family-tree.ged
 
 # Compare current GEDCOM with previous version
-git diff HEAD~1 -- public/gedcom/family.ged
+git diff HEAD~1 -- src/gedcoms/family-tree.ged
 ```
 
 ### Reverting to Previous Version
@@ -248,7 +238,7 @@ If the new GEDCOM has problems:
 
 ```bash
 # Revert to previous commit's GEDCOM
-git checkout HEAD~1 -- public/gedcom/family.ged
+git checkout HEAD~1 -- src/gedcoms/family-tree.ged
 
 # Commit the revert
 git commit -m "Revert to previous GEDCOM"
@@ -261,7 +251,7 @@ git push
 
 | What | Where | How |
 |------|-------|-----|
-| **GEDCOM Location** | `public/gedcom/family.ged` | Replace this file |
+| **GEDCOM Location** | `src/gedcoms/family-tree.ged` | Replace this file |
 | **Update Trigger** | Git push | Commit and push to trigger deploy |
 | **Deployment** | Netlify | Automatic on push |
 | **Testing** | Local dev server | `npm run dev` |
@@ -281,4 +271,4 @@ If you encounter issues:
 ---
 
 **Document Created:** 2026-03-21 (Story 1.4)
-**Last Updated:** 2026-03-21
+**Last Updated:** 2026-03-22 (Updated for bundled GEDCOM architecture)
