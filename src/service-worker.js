@@ -25,8 +25,13 @@ self.addEventListener("activate", (event) => {
 
 // Fetch: network-first with cache fallback
 self.addEventListener("fetch", (event) => {
-  // Skip non-GET and cross-origin requests
+  // Skip non-GET requests
   if (event.request.method !== "GET") return;
+
+  // Skip cross-origin requests (e.g., fonts.gstatic.com, external APIs)
+  const requestUrl = new URL(event.request.url);
+  const isCrossOrigin = requestUrl.origin !== location.origin;
+  if (isCrossOrigin) return;
 
   event.respondWith(
     fetch(event.request)
