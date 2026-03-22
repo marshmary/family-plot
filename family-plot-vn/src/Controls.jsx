@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { LanguageSwitcher } from './components/common/LanguageSwitcher'
 import { ThemeToggle } from './components/common/ThemeToggle'
+import { LogoutButton } from './components/auth/LogoutButton'
 import { useThemeStore } from './stores/themeStore'
 
 
@@ -471,6 +472,13 @@ const Controls = ({
 									.gedz
 								</button>
 							</div>
+						</div>
+
+						<hr className='settings-divider' />
+
+						{/* Logout */}
+						<div style={settingsRowStyle}>
+							<LogoutButton />
 						</div>
 
 						<hr className='settings-divider' />

@@ -3,14 +3,13 @@ import { useTranslation } from "react-i18next";
 import SampleButton from "./SampleButton";
 import faviconSvg from "./img/favicon.svg";
 import ohKayImg from "./img/oh-kay.png";
+import { ThemeToggle } from "./components/common/ThemeToggle";
 
 const Load = ({
   handleUpload,
   startNewPlot,
   samples,
   showError,
-  theme,
-  toggleTheme,
 }) => {
   const { t } = useTranslation();
   const [showGedcomModal, setShowGedcomModal] = useState(false);
@@ -119,28 +118,7 @@ const Load = ({
           )}
 
           <section className="links-area">
-            <button
-              className="theme-toggle-slider"
-              onClick={toggleTheme}
-              aria-label={theme === "dark" ? t('controls.dark') : t('controls.light')}
-            >
-              <span
-                className={theme === "dark" ? "active" : ""}
-                aria-label={t('controls.dark')}
-              >
-                <span className="material-icons-outlined">dark_mode</span>
-              </span>
-              <span
-                className={theme === "light" ? "active" : ""}
-                aria-label={t('controls.light')}
-              >
-                <span className="material-icons-outlined">light_mode</span>
-              </span>
-              <span
-                className="slider"
-                style={{ left: theme === "dark" ? 0 : 33 }}
-              ></span>
-            </button>
+            <ThemeToggle />
             <a
               href="https://github.com/oh-kay-blanket/family-plot"
               aria-label="GitHub"
