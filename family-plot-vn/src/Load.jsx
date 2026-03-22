@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { FamilyTreeModal } from "./components/common/FamilyTreeModal";
 import faviconSvg from "./img/favicon.svg";
 import { ThemeToggle } from "./components/common/ThemeToggle";
 import { LanguageSwitcher } from "./components/common/LanguageSwitcher";
@@ -13,6 +14,19 @@ const Load = ({
 }) => {
   const { t } = useTranslation();
   const [showGedcomModal, setShowGedcomModal] = useState(false);
+  const [showFamilyTreeModal, setShowFamilyTreeModal] = useState(false);
+
+  useEffect(() => {
+    // Auto-open modal on page load (once per session)
+    const hasViewedModal = sessionStorage.getItem('familyTreeModalViewed');
+
+    if (!hasViewedModal) {
+      setTimeout(() => {
+        setShowFamilyTreeModal(true);
+        sessionStorage.setItem('familyTreeModalViewed', 'true');
+      }, 500);
+    }
+  }, []);
 
   return (
     <>
@@ -154,6 +168,14 @@ const Load = ({
             </p>
           </div>
         </div>
+      )}
+
+      {/* Family Tree Modal */}
+      {showFamilyTreeModal && (
+        <FamilyTreeModal
+          isOpen={showFamilyTreeModal}
+          onClose={() => setShowFamilyTreeModal(false)}
+        />
       )}
     </>
   );

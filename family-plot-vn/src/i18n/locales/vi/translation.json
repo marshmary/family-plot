@@ -177,5 +177,15 @@
     "discoverRoots": "Khám Phá Cội Nguồn",
     "discoverRootsDesc": "Khám phá lịch sử gia đình trong 3D",
     "discoverRootsAria": "Khám phá cây gia phả 3D"
+  },
+  "modal": {
+    "familyTree": "Cây Gia Phả",
+    "close": "Đóng",
+    "treeLoading": "Đang tải cây gia phả...",
+    "hints": {
+      "rotate": "Kéo để xoay",
+      "zoom": "Cuộn hoặc chụm để phóng to",
+      "select": "Chạm vào người để xem chi tiết"
+    }
   }
 }

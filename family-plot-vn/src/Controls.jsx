@@ -422,16 +422,16 @@ const Controls = ({
 							<p style={settingsLabelStyle}>{t('controls.names')}</p>
 							<div style={{ display: 'flex', gap: '0.4rem' }}>
 								<button
-									onClick={() => setNameFormat('firstLast')}
-									style={pillBtnStyle(nameFormat === 'firstLast')}
-								>
-									{t('controls.firstLast')}
-								</button>
-								<button
 									onClick={() => setNameFormat('lastFirst')}
 									style={pillBtnStyle(nameFormat === 'lastFirst')}
 								>
 									{t('controls.lastFirst')}
+								</button>
+								<button
+									onClick={() => setNameFormat('firstLast')}
+									style={pillBtnStyle(nameFormat === 'firstLast')}
+								>
+									{t('controls.firstLast')}
 								</button>
 							</div>
 						</div>
