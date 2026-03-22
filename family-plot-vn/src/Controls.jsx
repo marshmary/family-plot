@@ -62,8 +62,10 @@ const Controls = ({
 	}
 
 	// Search results (computed inline, no graph re-render)
+	// Guard against empty or undefined d3Data
+	const nodesArray = d3Data?.nodes || []
 	const searchResults = searchQuery.length > 0
-		? d3Data.nodes.filter((n) => {
+		? nodesArray.filter((n) => {
 			const q = searchQuery.toLowerCase()
 			return (
 				(n.name && n.name.toLowerCase().includes(q)) ||
@@ -78,7 +80,7 @@ const Controls = ({
 		setSearchOpen(false)
 		buildNodeHighlights(node)
 		// Zoom camera to the selected node
-		if (graphRef && graphRef.current) {
+		if (graphRef && graphRef.current && typeof graphRef.current.cameraPosition === 'function') {
 			const x = node.x || 0
 			const y = node.y ?? node.fy ?? 0
 			const z = node.z || 0

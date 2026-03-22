@@ -187,5 +187,35 @@
       "zoom": "Cuộn hoặc chụm để phóng to",
       "select": "Chạm vào người để xem chi tiết"
     }
+  },
+  "tutorial": {
+    "title": "Hướng Dẫn Sử Dụng",
+    "subtitle": "Học cách khám phá cây gia phả 3D",
+    "rotate": {
+      "title": "Kéo Để Xoay",
+      "description": "Nhấp và kéo chuột để xoay góc nhìn 3D",
+      "hint": "Thao tác: Nhấp trái + kéo"
+    },
+    "zoom": {
+      "title": "Phóng To/Thu Nhỏ",
+      "description": "Lăn chuột hoặc chụm ngón tay để phóng to/thu nhỏ",
+      "hint": "Thao tác: Lăn chuột hoặc chụm 2 ngón"
+    },
+    "pan": {
+      "title": "Di Chuyển",
+      "description": "Nhấp phải và kéo để di chuyển góc nhìn",
+      "hint": "Thao tác: Nhấp phải + kéo"
+    },
+    "select": {
+      "title": "Chọn Người",
+      "description": "Nhấp vào một người để xem chi tiết",
+      "hint": "Thao tác: Nhấp vào node người"
+    },
+    "search": {
+      "title": "Tìm Kiếm",
+      "description": "Gõ tên để tìm và tự động zoom đến người đó",
+      "hint": "Thao tác: Gõ tên trong thanh tìm kiếm"
+    },
+    "gotIt": "Đã Hiểu"
   }
 }
