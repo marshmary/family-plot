@@ -2,7 +2,7 @@
 # Documentation: https://docs.netlify.com/routing/headers/
 
 # HTTP Security Headers (Layer 2 security)
-# Note: Basic Auth removed - requires Netlify Pro plan. Using client-side passcode only.
+# Note: Client-side passcode auth removed; security headers still applied.
 /*
   X-Frame-Options: DENY
   X-Content-Type-Options: nosniff
