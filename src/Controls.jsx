@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import { LanguageSwitcher } from './components/common/LanguageSwitcher'
 import { ThemeToggle } from './components/common/ThemeToggle'
-import { LogoutButton } from './components/auth/LogoutButton'
 import { useThemeStore } from './stores/themeStore'
 
 
@@ -486,17 +485,10 @@ const Controls = ({
 							</div>
 						</div>
 
-						<hr className='settings-divider' />
+							<hr className='settings-divider' />
 
-						{/* Logout */}
-						<div style={settingsRowStyle}>
-							<LogoutButton />
-						</div>
-
-						<hr className='settings-divider' />
-
-						{/* Controls help */}
-						<div style={{ padding: '0.5rem 0' }}>
+							{/* Controls help */}
+							<div style={{ padding: '0.5rem 0' }}>
 							<p className='control-title' style={{ color: 'var(--text)' }}>
 								{t('controls.controls')}
 							</p>
