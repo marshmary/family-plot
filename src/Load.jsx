@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import faviconSvg from "./img/favicon.svg";
 import { ThemeToggle } from "./components/common/ThemeToggle";
 import { LanguageSwitcher } from "./components/common/LanguageSwitcher";
-import familyTreeFile from "./gedcoms/family-tree.ged";
+import familyTreeFile from "./gedcoms/kennedy.ged";
 
 const Load = ({
   handleUpload,
@@ -13,20 +13,6 @@ const Load = ({
 }) => {
   const { t } = useTranslation();
   const [showGedcomModal, setShowGedcomModal] = useState(false);
-  const hasTriggeredAutoLoad = useRef(false);
-
-  useEffect(() => {
-    // Auto-trigger "Discover Your Roots" on first page load (once per session)
-    const hasViewedDiscover = sessionStorage.getItem('familyTreeDiscoverClicked');
-
-    if (!hasViewedDiscover && !hasTriggeredAutoLoad.current) {
-      hasTriggeredAutoLoad.current = true;
-      setTimeout(() => {
-        sessionStorage.setItem('familyTreeDiscoverClicked', 'true');
-        readFile(familyTreeFile);
-      }, 500);
-    }
-  }, [readFile]);
 
   return (
     <>
@@ -43,7 +29,7 @@ const Load = ({
           </section>
 
           <section className="actions-area">
-            {/* Primary CTA - Discover Your Roots */}
+            {/* Primary CTA - Discovering example */}
             <div
               className="action-card action-card-discover"
               onClick={() => readFile(familyTreeFile)}

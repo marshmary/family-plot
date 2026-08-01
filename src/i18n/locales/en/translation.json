@@ -158,9 +158,9 @@
     "potter": "Potter"
   },
   "home": {
-    "discoverRoots": "Discover Your Roots",
-    "discoverRootsDesc": "Explore your family history in 3D",
-    "discoverRootsAria": "Explore the 3D family tree"
+    "discoverRoots": "Discovering example",
+    "discoverRootsDesc": "Explore an example family tree in 3D",
+    "discoverRootsAria": "Explore the 3D example family tree"
   },
   "modal": {
     "familyTree": "Family Tree",
